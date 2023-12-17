@@ -16,7 +16,7 @@ spec:
         app: memorybox-external
     spec:
       containers:
-        - name: memberbox_external
+        - name: memberbox-external
           image: docker.io/ikujo/memorybox-external:latest
           imagePullPolicy: Always
           env:
