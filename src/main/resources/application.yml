@@ -13,6 +13,10 @@ spring:
       maximum-pool-size: 30
       minimum-idle: 2
       connection-test-query: SELECT 1
+  jpa:
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.MySQLDialect
 
 #swagger
 springdoc:
