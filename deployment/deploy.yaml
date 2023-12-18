@@ -1,5 +1,5 @@
-apiVersion: apps/v1
 kind: Deployment
+apiVersion: apps/v1
 metadata:
   name: memorybox-external
   labels:
@@ -17,7 +17,7 @@ spec:
     spec:
       containers:
         - name: memberbox-external
-          image: docker.io/ikujo/memorybox-external:1.0.0
+          image: docker.io/hyeonkyo/memorybox-external:latest
           imagePullPolicy: Always
           env:
             - name: PORT
@@ -35,7 +35,7 @@ spec:
 ---
 
 kind: ConfigMap
-apiVefeat_cicd-setting-filersion: v1
+apiVersion: v1
 metadata:
   name: memorybox
   namespace: ikujo
