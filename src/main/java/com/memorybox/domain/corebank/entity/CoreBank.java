@@ -14,7 +14,7 @@ import java.time.LocalDateTime;
 
 @Entity
 @Getter
-@Builder
+//@Builder
 @NoArgsConstructor
 public class CoreBank {
 
@@ -31,8 +31,6 @@ public class CoreBank {
 
     private String productName;
 
-    private String productType;
-
     private LocalDate startDate;
 
     private LocalDate maturityDate;
@@ -40,21 +38,20 @@ public class CoreBank {
     @CreationTimestamp
     private LocalDateTime createdAt;
 
-/*    @Builder
-    public CoreBank(Long coreBankId, String accountNum, int balance, String receivedAccount, String productName, String productType, LocalDate startDate, LocalDate maturityDate, LocalDateTime createdAt){
+    @Builder
+    public CoreBank(Long coreBankId, String accountNum, int balance, String receivedAccount, String productName, LocalDate startDate, LocalDate maturityDate, LocalDateTime createdAt){
         this.coreBankId = coreBankId;
         this.accountNum = accountNum;
         this.balance = balance;
         this.receivedAccount = receivedAccount;
         this.productName = productName;
-        this.productType = productType;
         this.startDate = startDate;
         this.maturityDate = maturityDate;
         this.createdAt = createdAt;
-    }*/
+    }
 
-    public int changeMoney(int money){
-        balance = balance+money;
+    public int updateBalance(int money){
+        balance += money;
         return balance;
     }
 }

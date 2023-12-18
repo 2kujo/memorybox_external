@@ -2,6 +2,7 @@ package com.memorybox.api;
 
 import com.memorybox.domain.corebank.service.CoreBankService;
 import com.memorybox.dto.AccountCreateRequestDto;
+import com.memorybox.dto.BalanceUpdateRequestDto;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -19,17 +20,17 @@ public class CoreBankApi {
     }
 
     @PatchMapping("/balance")
-    public ResponseEntity<?> depositMoney(){
-        return ResponseEntity.ok().build();
+    public ResponseEntity<?> depositMoney(@RequestBody BalanceUpdateRequestDto balanceUpdateRequestDto){
+        return ResponseEntity.ok().body(coreBankService.updateBalance(balanceUpdateRequestDto));
     }
 
-    @GetMapping("/{accountNum}/info")
-    public ResponseEntity<?> getAccountInfo(@PathVariable String accountNum){
-        return ResponseEntity.ok().build();
+    @GetMapping("/{coreBankId}/info")
+    public ResponseEntity<?> getAccountInfo(@PathVariable Long coreBankId){
+        return ResponseEntity.ok().body(coreBankService.getCoreBankInfo(coreBankId));
     }
 
-    @GetMapping("/{accountNum}/maturity")
-    public ResponseEntity<?> getAccountMaturity(@PathVariable String accountNum){
+    @GetMapping("/{coreBankId}/maturity")
+    public ResponseEntity<?> getAccountMaturity(@PathVariable Long coreBankId){
         return ResponseEntity.ok().build();
     }
 }
