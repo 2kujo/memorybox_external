@@ -27,6 +27,7 @@ public class CoreBankService {
         return new AccountCreateResponseDto(account);
     }
 
+    @Transactional
     public int updateBalance(BalanceUpdateRequestDto balanceUpdateRequestDto){
         CoreBank coreBank = getCoreBank(balanceUpdateRequestDto.coreBankId());
         return coreBank.updateBalance(balanceUpdateRequestDto.money());
