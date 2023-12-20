@@ -3,12 +3,14 @@ package com.memorybox.domain.corebank.service;
 import com.memorybox.domain.corebank.entity.CoreBank;
 import com.memorybox.domain.corebank.repository.CoreBankRepository;
 import com.memorybox.dto.AccountCreateRequestDto;
+import com.memorybox.dto.AccountCreateResponseDto;
 import com.memorybox.dto.AccountInfoResponseDto;
 import com.memorybox.dto.BalanceUpdateRequestDto;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDate;
 import java.util.Random;
 
 @Slf4j
@@ -19,10 +21,10 @@ public class CoreBankService {
     private final CoreBankRepository coreBankRepository;
 
 
-    public String createAccount(AccountCreateRequestDto accountCreateRequestDto){
+    public AccountCreateResponseDto createAccount(AccountCreateRequestDto accountCreateRequestDto){
         String accountNum = createAccountNum();
-        coreBankRepository.save(accountCreateRequestDto.toEntity(accountNum));
-        return accountNum;
+        CoreBank account = coreBankRepository.save(accountCreateRequestDto.toEntity(accountNum, setMaturityDate()));
+        return new AccountCreateResponseDto(account);
     }
 
     public int updateBalance(BalanceUpdateRequestDto balanceUpdateRequestDto){
@@ -53,4 +55,11 @@ public class CoreBankService {
 
         return accountNum;
     }
+
+    public LocalDate setMaturityDate(){
+        LocalDate startDate = LocalDate.now();
+        int maturityYear = 1;
+        return startDate.plusYears(maturityYear);
+    }
+
 }

@@ -31,6 +31,7 @@ public class CoreBank {
 
     private String productName;
 
+    @CreationTimestamp
     private LocalDate startDate;
 
     private LocalDate maturityDate;
