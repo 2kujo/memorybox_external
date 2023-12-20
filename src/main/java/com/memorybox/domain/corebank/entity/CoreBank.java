@@ -4,51 +4,57 @@ import jakarta.persistence.*;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
-import org.hibernate.annotations.ColumnDefault;
 import org.hibernate.annotations.CreationTimestamp;
-import org.hibernate.annotations.DynamicInsert;
-import org.springframework.data.annotation.CreatedDate;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 
 @Entity
 @Getter
-//@Builder
 @NoArgsConstructor
 public class CoreBank {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name="id")
-    private Long coreBankId;
+    private Long id;
 
+    @Column(name = "user_id")
+    private long userId;
+
+    @Column(name = "account_num")
     private String accountNum;
 
+    @Column(name = "balance")
     private int balance;
 
-    private String receivedAccount;
-
+    @Column(name = "product_name")
     private String productName;
 
-    @CreationTimestamp
+    @Column(name = "start_date")
     private LocalDate startDate;
 
+    @Column(name = "maturity_date")
     private LocalDate maturityDate;
 
     @CreationTimestamp
+    @Column(name = "created_at")
     private LocalDateTime createdAt;
 
+    @Column(name = "maturity_enabled")
+    private boolean maturityEnabled;
+
     @Builder
-    public CoreBank(Long coreBankId, String accountNum, int balance, String receivedAccount, String productName, LocalDate startDate, LocalDate maturityDate, LocalDateTime createdAt){
-        this.coreBankId = coreBankId;
+    public CoreBank(String accountNum, int balance, String productName, LocalDate startDate, LocalDate maturityDate,
+                    LocalDateTime createdAt, long userId, boolean maturityEnabled){
+        this.userId = userId;
         this.accountNum = accountNum;
         this.balance = balance;
-        this.receivedAccount = receivedAccount;
         this.productName = productName;
         this.startDate = startDate;
         this.maturityDate = maturityDate;
         this.createdAt = createdAt;
+        this.maturityEnabled = maturityEnabled;
     }
 
     public int updateBalance(int money){
