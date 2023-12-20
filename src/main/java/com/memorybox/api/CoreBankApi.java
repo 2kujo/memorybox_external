@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequiredArgsConstructor
-@RequestMapping("/corebank")
+@RequestMapping("/core-bank")
 public class CoreBankApi {
 
     private final CoreBankService coreBankService;
@@ -25,12 +25,12 @@ public class CoreBankApi {
     }
 
     @GetMapping("/{coreBankId}/info")
-    public ResponseEntity<?> getAccountInfo(@PathVariable Long coreBankId){
+    public ResponseEntity<?> getAccountInfo(@PathVariable long coreBankId){
         return ResponseEntity.ok().body(coreBankService.getCoreBankInfo(coreBankId));
     }
 
     @GetMapping("/{coreBankId}/maturity")
-    public ResponseEntity<?> getAccountMaturity(@PathVariable Long coreBankId){
+    public ResponseEntity<?> getAccountMaturity(@PathVariable long coreBankId){
         return ResponseEntity.ok().build();
     }
 }

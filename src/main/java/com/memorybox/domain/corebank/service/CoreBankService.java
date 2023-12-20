@@ -9,6 +9,7 @@ import com.memorybox.dto.BalanceUpdateRequestDto;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.time.LocalDate;
 import java.util.Random;
@@ -19,7 +20,6 @@ import java.util.Random;
 public class CoreBankService {
 
     private final CoreBankRepository coreBankRepository;
-
 
     public AccountCreateResponseDto createAccount(AccountCreateRequestDto accountCreateRequestDto){
         String accountNum = createAccountNum();
@@ -32,17 +32,18 @@ public class CoreBankService {
         return coreBank.updateBalance(balanceUpdateRequestDto.money());
     }
 
-    public AccountInfoResponseDto getCoreBankInfo(Long coreBankId){
+    public AccountInfoResponseDto getCoreBankInfo(long coreBankId){
+        log.info(" >>> CoreBankService getCoreBankInfo Call!!!");
         CoreBank coreBank = getCoreBank(coreBankId);
         return new AccountInfoResponseDto(coreBank);
     }
 
-
-    public CoreBank getCoreBank(Long coreBankId){
+    private CoreBank getCoreBank(long coreBankId){
         return coreBankRepository.findById(coreBankId)
                 .orElseThrow(() -> new IllegalArgumentException("해당 계좌가 없습니다. id=" + coreBankId));
     }
-    public String createAccountNum(){
+
+    private String createAccountNum(){
         Random random = new Random();
 
         String accountNum;
@@ -56,7 +57,7 @@ public class CoreBankService {
         return accountNum;
     }
 
-    public LocalDate setMaturityDate(){
+    private LocalDate setMaturityDate(){
         LocalDate startDate = LocalDate.now();
         int maturityYear = 1;
         return startDate.plusYears(maturityYear);
