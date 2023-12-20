@@ -24,12 +24,16 @@ public class CoreBankService {
     public AccountCreateResponseDto createAccount(AccountCreateRequestDto accountCreateRequestDto){
         String accountNum = createAccountNum();
         CoreBank account = coreBankRepository.save(accountCreateRequestDto.toEntity(accountNum, setMaturityDate()));
+
+        log.info("create Account account: {} ", account);
         return new AccountCreateResponseDto(account);
     }
 
     @Transactional
     public int updateBalance(BalanceUpdateRequestDto balanceUpdateRequestDto){
         CoreBank coreBank = getCoreBank(balanceUpdateRequestDto.coreBankId());
+
+        log.info("update balance : {}", balanceUpdateRequestDto);
         return coreBank.updateBalance(balanceUpdateRequestDto.money());
     }
 
