@@ -24,7 +24,7 @@ public class CoreBankApi {
         return ResponseEntity.ok().body(coreBankService.updateBalance(balanceUpdateRequestDto));
     }
 
-    @GetMapping("/{coreBankId}/info")
+    @GetMapping("/{coreBankId}")
     public ResponseEntity<?> getAccountInfo(@PathVariable long coreBankId){
         return ResponseEntity.ok().body(coreBankService.getCoreBankInfo(coreBankId));
     }
